@@ -7,6 +7,9 @@ public class PlayerControl : MonoBehaviour
     public CharacterController controller;
     public Transform groundCheck;
     public LayerMask groundMask;
+    public GameObject jumpSound;
+    public GameObject landingSound;
+    public AudioSource movingSound;
 
     public float groundDistance = 0.4f;
     public float speed = 12f;
@@ -15,7 +18,8 @@ public class PlayerControl : MonoBehaviour
     
     Vector3 velocity;
     bool isOnGround;
-
+    bool isOnGroundLastFrame = false;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -30,17 +34,29 @@ public class PlayerControl : MonoBehaviour
         if(isOnGround && velocity.y < 0f)
         {
             velocity.y = -2f;
+            
         }
 
+        if(isOnGround == true && isOnGroundLastFrame == false)
+        {
+            Instantiate(landingSound, transform.position, Quaternion.identity);
+        }
+        isOnGroundLastFrame = isOnGround;
         if(isOnGround && Input.GetButtonDown("Jump"))
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);            
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            Instantiate(jumpSound, transform.position, Quaternion.identity);
         }
 
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         Vector3 motion = transform.right * x + transform.forward * z;
         controller.Move(motion * speed * Time.deltaTime);
+
+        if(isOnGround && controller.velocity.magnitude > 2f && movingSound.isPlaying == false)
+        {
+            movingSound.Play();
+        }
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
