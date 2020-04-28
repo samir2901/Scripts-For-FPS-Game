@@ -7,15 +7,14 @@ public class PlayerControl : MonoBehaviour
     public CharacterController controller;
     public Transform groundCheck;
     public LayerMask groundMask;
-    public GameObject jumpSound;
-    public GameObject landingSound;
-    public AudioSource movingSound;
+    public AudioClip jumpSound, landingSound, movingSound;    
+    public AudioSource audioSrc;
 
     public float groundDistance = 0.4f;
     public float speed = 12f;
     public float gravity = -9.81f;
     public float jumpHeight = 3f;
-    
+
     Vector3 velocity;
     bool isOnGround;
     bool isOnGroundLastFrame = false;
@@ -23,7 +22,7 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -31,21 +30,22 @@ public class PlayerControl : MonoBehaviour
     {
         isOnGround = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        if(isOnGround && velocity.y < 0f)
+        if (isOnGround && velocity.y < 0f)
         {
             velocity.y = -2f;
-            
-        }
 
-        if(isOnGround == true && isOnGroundLastFrame == false)
+        }
+        
+        if (isOnGround == true && isOnGroundLastFrame == false)
         {
-            Instantiate(landingSound, transform.position, Quaternion.identity);
+            audioSrc.PlayOneShot(movingSound);
         }
         isOnGroundLastFrame = isOnGround;
-        if(isOnGround && Input.GetButtonDown("Jump"))
+        if (isOnGround && Input.GetButtonDown("Jump"))
         {
+            Debug.Log("Jumping");
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-            Instantiate(jumpSound, transform.position, Quaternion.identity);
+            audioSrc.PlayOneShot(movingSound);
         }
 
         float x = Input.GetAxis("Horizontal");
@@ -53,12 +53,14 @@ public class PlayerControl : MonoBehaviour
         Vector3 motion = transform.right * x + transform.forward * z;
         controller.Move(motion * speed * Time.deltaTime);
 
-        if(isOnGround && controller.velocity.magnitude > 2f && movingSound.isPlaying == false)
+        if (isOnGround && controller.velocity.magnitude > 2f && audioSrc.isPlaying == false)
         {
-            movingSound.Play();
+            audioSrc.PlayOneShot(movingSound);
         }
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+        
     }
 }
+
