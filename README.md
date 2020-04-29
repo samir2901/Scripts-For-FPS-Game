@@ -6,3 +6,4 @@ These scripts are for making a first person character in Unity.
   3.  Gun.cs -> this script is for shooting.
   4.  Target.cs -> this script is for handling enemy damage and other props damage.
 Reference: https://youtu.be/_QajrabyTJc
+  5. EnemyAI.cs -> this scripts allows enemy to follow the FPS Player. This uses NavMesh
