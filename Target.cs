@@ -4,20 +4,31 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    public float health = 50f;
+    public float enemyhealth = 50f;    
+    Animator enemyAnim;
+    public AudioClip deadSound;
+    public AudioSource enemyAudioSource;
+    //ScoreManager scoreManager;
+    private void Start()
+    {
+        enemyAnim = GetComponent<Animator>();        
+    }
 
     public void TakeDamage(float amount)
     {
-        health -= amount;
-        Debug.Log(health);
-        if (health <= 0f)
+        enemyhealth -= amount;
+        Debug.Log(enemyhealth);
+        if (enemyhealth <= 0f)
         {            
-            Die();
+            Die();            
         }
     }
 
     void Die()
     {
-        Destroy(gameObject);
+        ScoreManager.currScore += 10;
+        enemyAudioSource.PlayOneShot(deadSound);
+        enemyAnim.SetBool("isDead", true);
+        Destroy(gameObject, 2f);
     }
 }

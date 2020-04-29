@@ -10,6 +10,7 @@ public class PlayerControl : MonoBehaviour
     public AudioClip jumpSound, landingSound, movingSound;    
     public AudioSource audioSrc;
 
+    public int health = 100;
     public float groundDistance = 0.4f;
     public float speed = 12f;
     public float gravity = -9.81f;
@@ -43,7 +44,7 @@ public class PlayerControl : MonoBehaviour
         isOnGroundLastFrame = isOnGround;
         if (isOnGround && Input.GetButtonDown("Jump"))
         {
-            Debug.Log("Jumping");
+            //Debug.Log("Jumping");
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             audioSrc.PlayOneShot(movingSound);
         }

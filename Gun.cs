@@ -15,6 +15,8 @@ public class Gun : MonoBehaviour
     public AudioSource firingSound;
 
     private float nextTimeToFire = 0f;
+    
+   
     void Update()
     {
         if (Input.GetButtonDown("Fire1") && Time.time >= nextTimeToFire)
@@ -37,8 +39,12 @@ public class Gun : MonoBehaviour
             Target target = hitInfo.transform.GetComponent<Target>();
             if (target != null)
             {
-                Debug.Log(hitInfo.transform.name);
-                target.TakeDamage(damage);
+                //Debug.Log(hitInfo.transform.name);
+                if (target.CompareTag("Enemy")) 
+                {
+                    target.TakeDamage(damage);
+                }
+                
             }
             if(hitInfo.rigidbody != null)
             {
