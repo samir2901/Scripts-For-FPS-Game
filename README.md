@@ -5,7 +5,9 @@ These scripts are for making a first person game in Unity.
   2.  PlayerControl.cs -> this script is for the movement along the plane and jumping.
   3.  Gun.cs -> this script is for shooting.
   4.  Target.cs -> this script is for handling enemy damage and other props damage.
-  5. EnemyAI.cs -> this scripts allows enemy to follow the FPS Player. This uses NavMesh
+  5.  EnemyAI.cs -> this scripts allows enemy to follow the FPS Player. This uses NavMesh
+  6.  PlayerUI.cs -> this scripts changes the Health UI text of Player.
+  7.  ScoreManager.cs -> this scripts handles the score system of the game.
   
   References:
    1. [First Person Movement](https://youtu.be/_QajrabyTJc)
