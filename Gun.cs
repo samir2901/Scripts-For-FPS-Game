@@ -14,8 +14,7 @@ public class Gun : MonoBehaviour
     public GameObject impactEffect;
     public AudioSource firingSound;
 
-    private float nextTimeToFire = 0f;
-    
+    private float nextTimeToFire = 0f;    
    
     void Update()
     {
@@ -25,6 +24,7 @@ public class Gun : MonoBehaviour
             nextTimeToFire = Time.time + (1f / fireRate);
             Shoot();
             firingSound.Play();
+            fpsCamera.GetComponent<MouseLook>().AddRecoil(2, 2);
         }
         
     }
