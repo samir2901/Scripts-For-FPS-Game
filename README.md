@@ -8,6 +8,9 @@ These scripts are for making a first person game in Unity.
   5.  EnemyAI.cs -> this scripts allows enemy to follow the FPS Player. This uses NavMesh
   6.  PlayerUI.cs -> this scripts changes the Health UI text of Player.
   7.  ScoreManager.cs -> this scripts handles the score system of the game.
+  8.  AmmoManager.cs -> Updates the UI for Ammo
+  9.  AmmoSpawnManager.cs -> Spawns Ammo Collectibles
+  10. HealthSpawnManager.cs -> Spawns Health Collectibles
   
   References:
    1. [First Person Movement](https://youtu.be/_QajrabyTJc)
