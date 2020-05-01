@@ -11,6 +11,7 @@ These scripts are for making a first person game in Unity.
   8.  AmmoManager.cs -> Updates the UI for Ammo
   9.  AmmoSpawnManager.cs -> Spawns Ammo Collectibles
   10. HealthSpawnManager.cs -> Spawns Health Collectibles
+  11. EnemSpawnManager.cs -> Spawns Enemies at random location
   
   References:
    1. [First Person Movement](https://youtu.be/_QajrabyTJc)
