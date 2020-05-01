@@ -5,10 +5,11 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    float stoppingDist = 3f;
+    public float stoppingDist = 10f;
     float lastAttackTime = 0f;
     float attackCoolDown = 3f;
 
+    public int attackAmount;
     public float lookRadius = 10f;
     public AudioClip attackSound;
     public AudioSource enemyAudioSource;
@@ -28,7 +29,7 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float dist = Vector3.Distance(target.transform.position, transform.position);
+        float dist = Vector3.Distance(target.transform.position, transform.position);        
         //Debug.Log(dist);
         if (dist < stoppingDist)
         {            
@@ -41,7 +42,7 @@ public class EnemyAI : MonoBehaviour
                 enemyAnim.SetBool("isWalking", false);
                 //Debug.Log("Attacked by enemy");
                 PlayerControl playerControlScript = target.GetComponent<PlayerControl>();
-                playerControlScript.health -= 1;
+                playerControlScript.health -= attackAmount;
             }
         }
         else

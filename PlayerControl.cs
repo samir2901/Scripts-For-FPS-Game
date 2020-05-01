@@ -7,8 +7,9 @@ public class PlayerControl : MonoBehaviour
     public CharacterController controller;
     public Transform groundCheck;
     public LayerMask groundMask;
-    public AudioClip jumpSound, landingSound, movingSound, healthPickupSound;    
+    public AudioClip jumpSound, landingSound, movingSound, healthPickupSound, hurtSound;    
     public AudioSource audioSrc;
+    public Camera fpsCamera;
 
     public int health = 100;
     public float groundDistance = 0.4f;
@@ -48,11 +49,14 @@ public class PlayerControl : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             audioSrc.PlayOneShot(movingSound);
         }
+        
 
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         Vector3 motion = transform.right * x + transform.forward * z;
         controller.Move(motion * speed * Time.deltaTime);
+
+              
 
         if (isOnGround && controller.velocity.magnitude > 2f && audioSrc.isPlaying == false)
         {
@@ -60,7 +64,7 @@ public class PlayerControl : MonoBehaviour
         }
 
         velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+        controller.Move(velocity * Time.deltaTime);        
         
     }
 
@@ -75,7 +79,13 @@ public class PlayerControl : MonoBehaviour
                 audioSrc.PlayOneShot(healthPickupSound);
                 Destroy(other.gameObject);
             }
+        }else if (other.CompareTag("Enemy"))
+        {
+            audioSrc.PlayOneShot(hurtSound);
+            StartCoroutine(fpsCamera.GetComponent<MouseLook>().CameraShake(0.15f,1f));
         }
     }
+
+    
 }
 
