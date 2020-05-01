@@ -7,7 +7,7 @@ public class PlayerControl : MonoBehaviour
     public CharacterController controller;
     public Transform groundCheck;
     public LayerMask groundMask;
-    public AudioClip jumpSound, landingSound, movingSound;    
+    public AudioClip jumpSound, landingSound, movingSound, healthPickupSound;    
     public AudioSource audioSrc;
 
     public int health = 100;
@@ -62,6 +62,20 @@ public class PlayerControl : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //Debug.Log(other.gameObject.name);
+        if (other.CompareTag("Health"))
+        {
+            if (health < 100)
+            {
+                health = 100;
+                audioSrc.PlayOneShot(healthPickupSound);
+                Destroy(other.gameObject);
+            }
+        }
     }
 }
 

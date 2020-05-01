@@ -17,7 +17,7 @@ public class Target : MonoBehaviour
     public void TakeDamage(float amount)
     {
         enemyhealth -= amount;
-        Debug.Log(enemyhealth);
+        //Debug.Log(enemyhealth);
         if (enemyhealth <= 0f)
         {            
             Die();            

@@ -8,8 +8,8 @@ public class Gun : MonoBehaviour
     public float range = 100f;
     public float fireRate = 15f;
 
-    public int maxAmmo = 1;
-    private int currentAmmo = -1;
+    public int maxAmmo = 100;
+    public int currentAmmo = -1;
     public float reloadTime = 1f;
     private bool isReloading = false;
 
@@ -75,6 +75,20 @@ public class Gun : MonoBehaviour
         currentAmmo = maxAmmo;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        //Debug.Log(other);
+        if (other.CompareTag("Ammo"))
+        {
+            if (currentAmmo < maxAmmo)
+            {
+                gunSound.PlayOneShot(reloadSound, 0.3f);
+                currentAmmo = maxAmmo;
+                isReloading = false;
+                Destroy(other.gameObject);
+            }            
+        }
+    }
     void Shoot()
     {
         currentAmmo--;        
@@ -105,4 +119,6 @@ public class Gun : MonoBehaviour
     }
 
     
+
+
 }
