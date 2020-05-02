@@ -37,14 +37,18 @@ public class Gun : MonoBehaviour
     void Update()
     {
         //Debug.Log(currentAmmo);
+        
         if (isReloading) 
         {
             return;
         }
+        
         if (currentAmmo <= 0)
         {
-            StartCoroutine(Reload());
-            isReloading = false;
+            //StartCoroutine(Reload());
+            //isReloading = false;
+            gunAnim.SetBool("Shooting", false);
+            gunAnim.SetBool("Reloading", false);
             return;
         }
         if (Input.GetButtonDown("Fire1") && Time.time >= nextTimeToFire)
@@ -63,18 +67,7 @@ public class Gun : MonoBehaviour
         }        
     }
 
-    IEnumerator Reload()
-    {
-        isReloading = true;
-        //Debug.Log("Reloading.....");        
-        gunAnim.SetBool("Reloading", true);
-        gunAnim.SetBool("Shooting", false);
-        gunSound.PlayOneShot(reloadSound,0.3f);
-        yield return new WaitForSeconds(reloadTime);        
-        gunAnim.SetBool("Reloading", false);
-        currentAmmo = maxAmmo;
-    }
-
+    
     private void OnTriggerEnter(Collider other)
     {
         //Debug.Log(other);
@@ -82,6 +75,7 @@ public class Gun : MonoBehaviour
         {
             if (currentAmmo < maxAmmo)
             {
+                                
                 gunSound.PlayOneShot(reloadSound, 0.3f);
                 currentAmmo = maxAmmo;
                 isReloading = false;

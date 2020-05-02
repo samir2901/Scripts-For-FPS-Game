@@ -30,6 +30,7 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         isOnGround = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if (isOnGround && velocity.y < 0f)
@@ -65,6 +66,7 @@ public class PlayerControl : MonoBehaviour
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);        
+        
         
     }
 

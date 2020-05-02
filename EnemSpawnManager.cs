@@ -17,7 +17,7 @@ public class EnemSpawnManager : MonoBehaviour
     {
         enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
         //Debug.Log(enemyCount);
-        if(enemyCount <= 6)
+        if(enemyCount <= 10)
         {
             SpawnEnemy();
         }
