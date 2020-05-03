@@ -18,13 +18,14 @@ public class PlayerControl : MonoBehaviour
     public float jumpHeight = 3f;
 
     Vector3 velocity;
+    Vector3 startPosition;
     bool isOnGround;
     bool isOnGroundLastFrame = false;
     
     // Start is called before the first frame update
     void Start()
     {
-
+        startPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -65,7 +66,12 @@ public class PlayerControl : MonoBehaviour
         }
 
         velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);        
+        controller.Move(velocity * Time.deltaTime);
+
+        if(transform.position.y < -10)
+        {
+            transform.position = startPosition;
+        }
         
         
     }

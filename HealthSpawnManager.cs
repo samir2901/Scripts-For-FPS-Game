@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HealthSpawnManager : MonoBehaviour
 {
+    [SerializeField] int healthSpawnNumber;
     public GameObject healthPrefab;
     private int healthObjCount;
     // Start is called before the first frame update
@@ -16,7 +17,7 @@ public class HealthSpawnManager : MonoBehaviour
     void Update()
     {
         healthObjCount = GameObject.FindGameObjectsWithTag("Health").Length;
-        if(healthObjCount <= 2)
+        if(healthObjCount <= healthSpawnNumber)
         {
             SpawnHealth();
         }

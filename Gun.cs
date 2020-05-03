@@ -58,7 +58,7 @@ public class Gun : MonoBehaviour
             Shoot();
             gunAnim.SetBool("Shooting", true);
             gunSound.PlayOneShot(shootSound);
-            fpsCamera.GetComponent<MouseLook>().AddRecoil(2, 2);
+            fpsCamera.GetComponent<MouseLook>().AddRecoil(Random.Range(-2f,2f), Random.Range(-2f, 2f));
         }
         else
         {

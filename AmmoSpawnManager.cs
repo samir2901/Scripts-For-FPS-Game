@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AmmoSpawnManager : MonoBehaviour
 {
+    [SerializeField] int ammoSpawnNumber;
     public GameObject ammo;
     private int ammoCount;
     //Vector3 spawnPos;
@@ -17,7 +18,7 @@ public class AmmoSpawnManager : MonoBehaviour
     void Update()
     {
         ammoCount = GameObject.FindGameObjectsWithTag("Ammo").Length;        
-        if(ammoCount <= 3)
+        if(ammoCount <= ammoSpawnNumber)
         {
             SpawnAmmo();
         }

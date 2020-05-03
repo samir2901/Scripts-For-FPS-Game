@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class EnemSpawnManager : MonoBehaviour
 {
+    [SerializeField] int EnemySpawnNumber;
     public GameObject enemyPrefab;
-    private int enemyCount;
+    private int enemyCount;    
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +18,7 @@ public class EnemSpawnManager : MonoBehaviour
     {
         enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
         //Debug.Log(enemyCount);
-        if(enemyCount <= 10)
+        if(enemyCount <= EnemySpawnNumber)
         {
             SpawnEnemy();
         }
