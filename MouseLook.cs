@@ -9,10 +9,7 @@ public class MouseLook : MonoBehaviour
     float xRotation = 0f;
     float sideRecoil = 0f;
     float upRecoil = 0f;
-    void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;    
-    }
+    
     void Update()
     {
         float mouseX = sideRecoil + Input.GetAxis("Mouse X") * mouseSenstiviy * Time.deltaTime;
