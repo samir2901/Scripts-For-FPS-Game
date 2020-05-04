@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class AmmoSpawnManager : MonoBehaviour
 {
-    [SerializeField] int ammoSpawnNumber;
+    [SerializeField] int ammoSpawnNumber = 1;
+    [SerializeField] float minX = 0f, maxX = 360f;
+    [SerializeField] float minZ = 100f, maxZ = 360f;
+    [SerializeField] float yPos = 1.3644f;
     public GameObject ammo;
     private int ammoCount;
     //Vector3 spawnPos;
@@ -26,7 +29,7 @@ public class AmmoSpawnManager : MonoBehaviour
 
     void SpawnAmmo()
     {
-        Vector3 pos = new Vector3(Random.Range(0f, 360f), 1.3644f, Random.Range(100f, 360f));
+        Vector3 pos = new Vector3(Random.Range(minX, maxX), yPos, Random.Range(minZ, maxZ));
         //Debug.Log(pos);
         Instantiate(ammo, pos, ammo.transform.rotation);
     }

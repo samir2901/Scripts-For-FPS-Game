@@ -11,7 +11,8 @@ public class PlayerControl : MonoBehaviour
     public AudioSource audioSrc;
     public Camera fpsCamera;
 
-    public int health = 100;
+    public int maxHealth = 50;
+    [HideInInspector] public int health;
     public float groundDistance = 0.4f;
     public float speed = 12f;
     public float gravity = -9.81f;
@@ -26,6 +27,7 @@ public class PlayerControl : MonoBehaviour
     void Start()
     {
         startPosition = transform.position;
+        health = maxHealth;
     }
 
     // Update is called once per frame
@@ -81,9 +83,9 @@ public class PlayerControl : MonoBehaviour
         //Debug.Log(other.gameObject.name);
         if (other.CompareTag("Health"))
         {
-            if (health < 100)
+            if (health < maxHealth)
             {
-                health = 100;
+                health = maxHealth;
                 audioSrc.PlayOneShot(healthPickupSound);
                 Destroy(other.gameObject);
             }

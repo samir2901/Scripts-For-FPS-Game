@@ -14,7 +14,7 @@ public class PlayerUI : MonoBehaviour
     void Start()
     {
         playerControlScript = player.GetComponent<PlayerControl>();                
-        healthAmount.text = "HEALTH: 100";
+        healthAmount.text = "HEALTH: " + playerControlScript.maxHealth.ToString();
     }
 
     // Update is called once per frame

@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class EnemSpawnManager : MonoBehaviour
 {
-    [SerializeField] int EnemySpawnNumber;
+    [SerializeField] int EnemySpawnNumber = 10;
+    [SerializeField] float minX = 0f, maxX = 360f;
+    [SerializeField] float minZ = 100f, maxZ = 360f;
+    [SerializeField] float yPos = 1.3644f;
     public GameObject enemyPrefab;
     private int enemyCount;    
     // Start is called before the first frame update
@@ -26,7 +29,7 @@ public class EnemSpawnManager : MonoBehaviour
 
     void SpawnEnemy()
     {
-        Vector3 pos = new Vector3(Random.Range(0f, 360f), 1.3644f, Random.Range(100f, 360f));        
+        Vector3 pos = new Vector3(Random.Range(minX, maxX), yPos, Random.Range(minZ, maxZ));        
         Instantiate(enemyPrefab, pos, enemyPrefab.transform.rotation);
     }
 }

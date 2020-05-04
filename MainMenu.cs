@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject quitGameDialogBox, mainMenuPanel, mapSelectPanel, optionsPanel;
+   public GameObject quitGameDialogBox, mainMenuPanel, mapSelectPanel, optionsPanel, controlsPanel;
    public void playGame()
     {
         mapSelectPanel.SetActive(true);
@@ -15,8 +15,16 @@ public class MainMenu : MonoBehaviour
     public void optionMenu()
     {
         optionsPanel.SetActive(true);
+        mainMenuPanel.SetActive(false);        
+    }
+
+
+    public void showControlsMenu()
+    {
+        controlsPanel.SetActive(true);
         mainMenuPanel.SetActive(false);
     }
+
 
     public void quitGame()
     {
@@ -36,6 +44,7 @@ public class MainMenu : MonoBehaviour
 
     public void backtoMainMenu()
     {
+        controlsPanel.SetActive(false);
         optionsPanel.SetActive(false);
         mapSelectPanel.SetActive(false);
         mainMenuPanel.SetActive(true);
